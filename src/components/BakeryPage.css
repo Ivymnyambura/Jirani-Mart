@@ -1,0 +1,416 @@
+/* ================= BAKERY PAGE ================= */
+
+.bakery-page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+
+/* ================= HEADER ================= */
+
+.bakery-page .header {
+  height: 66px;
+  background: #07549a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.bakery-page .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bakery-page .logo-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: white;
+  color: #07549a;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.bakery-page .logo-text {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.bakery-page .logo-text strong {
+  font-size: 18px;
+}
+
+.bakery-page .logo-text span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+
+/* ================= HEADER ACTIONS ================= */
+
+.bakery-page .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.bakery-page .header-action,
+.bakery-page .cart-button {
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bakery-page .cart-button {
+  font-size: 15px;
+}
+
+
+/* ================= NAVIGATION ================= */
+
+.bakery-page .navigation {
+  height: 38px;
+  background: #06427b;
+
+  display: flex;
+  align-items: center;
+
+  padding-left: 32px;
+}
+
+.bakery-page .nav-link {
+  height: 38px;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bakery-page .nav-link:hover {
+  background: #07549a;
+}
+
+.bakery-page .nav-link.active {
+  background: #07549a;
+  border-bottom: 3px solid #ed1745;
+}
+
+
+/* ================= SEARCH ================= */
+
+.bakery-search-section {
+  background: #f1f5fa;
+  padding: 11px 20px;
+  border-bottom: 1px solid #d9e0e8;
+}
+
+.bakery-search-box {
+  width: 674px;
+  height: 42px;
+
+  margin: auto;
+
+  display: flex;
+
+  background: white;
+  border: 1px solid #bcd4f3;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.bakery-search-box input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+
+  padding: 0 20px;
+
+  font-size: 14px;
+}
+
+.bakery-search-box button {
+  width: 123px;
+
+  border: none;
+  background: #ed1745;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* ================= MAIN ================= */
+
+.bakery-main {
+  padding: 24px 53px 100px;
+}
+
+.bakery-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.breadcrumb {
+  color: #8091a7;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.bakery-top h1 {
+  margin: 0;
+
+  color: #102a43;
+  font-size: 26px;
+}
+
+.bakery-description {
+  color: #66788a;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+
+/* ================= SORT ================= */
+
+.sort-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 32px;
+}
+
+.sort-box label {
+  color: #66788a;
+  font-size: 13px;
+}
+
+.sort-box select {
+  width: 142px;
+  height: 32px;
+
+  border: 1px solid #d6dde5;
+  border-radius: 4px;
+
+  background: white;
+  padding: 0 10px;
+}
+
+
+/* ================= FILTERS ================= */
+
+.bakery-filters {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.filter {
+  border: 1px solid #dce3eb;
+  background: white;
+
+  padding: 7px 15px;
+
+  border-radius: 20px;
+
+  color: #243b53;
+  cursor: pointer;
+}
+
+.filter.active {
+  background: #0560a9;
+  color: white;
+  border-color: #0560a9;
+}
+
+
+/* ================= PRODUCT COUNT ================= */
+
+.product-count {
+  margin-top: 25px;
+
+  color: #8a9bb0;
+  font-size: 13px;
+}
+
+
+/* ================= PRODUCTS ================= */
+
+.bakery-products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  margin-top: 16px;
+}
+
+.bakery-product {
+  border: 1px solid #dce3eb;
+  border-radius: 9px;
+  overflow: hidden;
+  background: white;
+}
+
+
+/* ================= PRODUCT IMAGE ================= */
+
+.product-image {
+  height: 300px;
+  position: relative;
+  background: #f3f5f7;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  display: block;
+}
+
+.product-badge {
+  position: absolute;
+
+  top: 14px;
+  left: 9px;
+
+  padding: 4px 8px;
+
+  color: white;
+
+  border-radius: 4px;
+
+  font-size: 10px;
+  font-weight: bold;
+
+  z-index: 2;
+}
+
+.product-badge.fresh {
+  background: #08a84f;
+}
+
+.product-badge.sale {
+  background: #ed1745;
+}
+
+
+/* ================= WISHLIST ================= */
+
+.wishlist-button {
+  position: absolute;
+
+  top: 9px;
+  right: 9px;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: white;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+
+/* ================= PRODUCT INFO ================= */
+
+.product-info {
+  padding: 12px;
+}
+
+.product-category {
+  margin: 0 0 5px;
+
+  color: #8293a7;
+  font-size: 12px;
+}
+
+.product-info h3 {
+  margin: 0;
+
+  font-size: 15px;
+  color: #102a43;
+}
+
+.product-size {
+  margin: 5px 0;
+
+  color: #8293a7;
+  font-size: 12px;
+}
+
+.rating {
+  margin: 7px 0;
+
+  color: #ffb000;
+  font-size: 12px;
+}
+
+.rating span {
+  color: #8293a7;
+  margin-left: 4px;
+}
+
+.product-price {
+  color: #0060a9;
+  font-size: 18px;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.price-row del {
+  color: #9aa7b5;
+  font-size: 11px;
+}
+
+.price-row span {
+  color: #ed1745;
+  font-size: 11px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+  .bakery-products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bakery-search-box {
+    width: 70%;
+  }
+}
