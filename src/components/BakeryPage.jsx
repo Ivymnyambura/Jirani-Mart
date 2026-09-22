@@ -1,6 +1,12 @@
+import { useState } from "react";
 import "./BakeryPage.css";
 
 function BakeryPage() {
+const [cart, setCart] = useState([]);
+  const addToCart = (product) => {
+    setCart((currentCart) => [...currentCart, product]);
+  };
+
   return (
     <div className="bakery-page">
 
@@ -164,6 +170,18 @@ function BakeryPage() {
               </p>
 
               <strong className="product-price">KSh4.50</strong>
+              <button
+               className="add-to-cart-button"
+                onClick={() =>
+                addToCart({
+                  name: "Sourdough Loaf",
+                   price: 4.5,
+                    })
+                 }
+>
+  + Add to Cart
+</button>
+              
             </div>
           </div>
 
@@ -194,6 +212,17 @@ function BakeryPage() {
               </p>
 
               <strong className="product-price">KSh1.80</strong>
+              <button
+             className="add-to-cart-button"
+               onClick={() =>
+                 addToCart({
+                   name: "Butter Croissant",
+                    price: 1.8,
+                   })
+  }
+>
+  + Add to Cart
+</button>
             </div>
           </div>
 
@@ -228,6 +257,17 @@ function BakeryPage() {
                 <del>KSh10.00</del>
                 <span>-15%</span>
               </div>
+              <button
+                className="add-to-cart-button"
+                 onClick={() =>
+                  addToCart({
+                   name: "Assorted Pastry Box",
+                     price: 8.5,
+    })
+  }
+>
+  + Add to Cart
+</button>
             </div>
           </div>
 
@@ -257,12 +297,46 @@ function BakeryPage() {
               </p>
 
               <strong className="product-price">KSh3.80</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Seeded Rye Bread",
+      price: 3.8,
+    })
+  }
+>
+  + Add to Cart
+</button>
             </div>
           </div>
 
         </section>
 
       </main>
+
+      {cart.length > 0 && (
+  <div className="cart-bar">
+    <div className="cart-summary">
+      🛒
+      <strong>{cart.length} item(s)</strong>
+      <span>
+        Total: KSh
+        {cart.reduce((total, item) => total + item.price, 0).toFixed(2)}
+      </span>
+    </div>
+
+    <div className="cart-actions">
+      <button className="view-cart-button">
+        View Cart
+      </button>
+
+      <button className="checkout-button">
+        Checkout
+      </button>
+    </div>
+  </div>
+)}
 
     </div>
   );
