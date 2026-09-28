@@ -688,13 +688,22 @@ function BakeryPage() {
     <div className="cart-summary">
       🛒
 
-      <strong>{cart.length} item(s)</strong>
+      <strong>
+  {cart.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  )} item(s)
+</strong>
 
       <span>
         Total: KSh
         {cart
-          .reduce((total, item) => total + item.price, 0)
-          .toFixed(2)}
+  .reduce(
+    (total, item) =>
+      total + item.price * (item.quantity || 1),
+    0
+  )
+  .toFixed(2)}
       </span>
     </div>
 

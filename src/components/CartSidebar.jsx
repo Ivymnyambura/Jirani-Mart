@@ -52,42 +52,47 @@ function CartSidebar({
             </div>
           ) : (
             cart.map((item, index) => (
-              <div className="cart-sidebar-item" key={index}>
-                <div className="cart-item-details">
-                  <h3>{item.name}</h3>
+             <div className="cart-sidebar-item" key={index}>
+  <div className="cart-item-details">
+    <h3>{item.name}</h3>
 
-                  <p>
-                    KSh{Number(item.price).toFixed(2)}
-                  </p>
-                </div>
+    <p className="cart-item-unit-price">
+      KSh{Number(item.price).toFixed(2)} each
+    </p>
 
-                <div className="cart-item-actions">
-  <div className="quantity-controls">
-    <button
-      onClick={() => onDecrease(index)}
-      aria-label="Decrease quantity"
-    >
-      −
-    </button>
-
-    <span>{item.quantity || 1}</span>
-
-    <button
-      onClick={() => onIncrease(index)}
-      aria-label="Increase quantity"
-    >
-      +
-    </button>
+    <strong className="cart-item-total">
+      KSh
+      {(Number(item.price) * (item.quantity || 1)).toFixed(2)}
+    </strong>
   </div>
 
-  <button
-    className="remove-cart-item"
-    onClick={() => onRemove(index)}
-  >
-    Remove
-  </button>
+  <div className="cart-item-actions">
+    <div className="quantity-controls">
+      <button
+        onClick={() => onDecrease(index)}
+        aria-label="Decrease quantity"
+      >
+        −
+      </button>
+
+      <span>{item.quantity || 1}</span>
+
+      <button
+        onClick={() => onIncrease(index)}
+        aria-label="Increase quantity"
+      >
+        +
+      </button>
+    </div>
+
+    <button
+      className="remove-cart-item"
+      onClick={() => onRemove(index)}
+    >
+      Remove
+    </button>
+  </div>
 </div>
-              </div>
             ))
           )}
         </div>
