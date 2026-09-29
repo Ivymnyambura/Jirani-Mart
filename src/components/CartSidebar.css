@@ -221,3 +221,78 @@
     max-width: 100%;
   }
 }
+/* =========================================
+   LOCATION STATUS
+   ========================================= */
+
+.use-location-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.location-message {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: #eef7ee;
+  color: #347a3c;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.location-map .map-placeholder strong {
+  display: block;
+}
+
+.location-map .map-placeholder p {
+  word-break: break-word;
+}
+/* =========================================
+   JIRANI MART DROPDOWNS
+   ========================================= */
+
+.checkout-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 42px 13px 14px;
+  border: 2px solid #07549a;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #07549a;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+
+  /* Gives the dropdown a cleaner custom arrow */
+  appearance: none;
+  -webkit-appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, #07549a 50%),
+    linear-gradient(135deg, #07549a 50%, transparent 50%);
+  background-position:
+    calc(100% - 19px) 17px,
+    calc(100% - 13px) 17px;
+  background-size:
+    6px 6px,
+    6px 6px;
+  background-repeat: no-repeat;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.checkout-select:hover {
+  background-color: #f0f7ff;
+  border-color: #06457d;
+}
+
+.checkout-select:focus {
+  border-color: #d62828;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.12);
+}

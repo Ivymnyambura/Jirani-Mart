@@ -744,6 +744,7 @@ function BakeryPage() {
 {showCheckout && (
   <div className="modal-overlay">
     <div className="checkout-modal">
+
       <button
         className="close-modal"
         onClick={() => setShowCheckout(false)}
@@ -754,7 +755,13 @@ function BakeryPage() {
       <h2>Checkout</h2>
 
       <p>
-        Items in cart: <strong>{cart.length}</strong>
+        Items in cart:{" "}
+        <strong>
+          {cart.reduce(
+            (total, item) => total + (item.quantity || 1),
+            0
+          )}
+        </strong>
       </p>
 
       <div className="checkout-total">
@@ -763,7 +770,12 @@ function BakeryPage() {
         <strong>
           KSh
           {cart
-            .reduce((total, item) => total + item.price, 0)
+            .reduce(
+              (total, item) =>
+                total +
+                Number(item.price) * (item.quantity || 1),
+              0
+            )
             .toFixed(2)}
         </strong>
       </div>
@@ -811,11 +823,42 @@ function BakeryPage() {
       </label>
 
       {paymentMethod === "mobile" && (
-        <input
-          type="tel"
-          placeholder="Mobile Money Number"
-          className="checkout-input"
-        />
+        <div className="mobile-money-options">
+
+          <label className="payment-option mobile-provider-option">
+  <input
+    type="radio"
+    name="mobileProvider"
+    value="mpesa"
+    defaultChecked
+  />
+
+  <span className="payment-brand">
+    <span className="payment-icon mpesa-icon"></span>
+    <span>M-Pesa</span>
+  </span>
+</label>
+
+<label className="payment-option mobile-provider-option">
+  <input
+    type="radio"
+    name="mobileProvider"
+    value="airtel"
+  />
+
+  <span className="payment-brand">
+    <span className="payment-icon airtel-icon"></span>
+    <span>Airtel Money</span>
+  </span>
+</label>
+
+          <input
+            type="tel"
+            placeholder="Mobile Money Number"
+            className="checkout-input"
+          />
+
+        </div>
       )}
 
       <label className="payment-option">
@@ -831,6 +874,7 @@ function BakeryPage() {
 
       {paymentMethod === "card" && (
         <div className="card-payment-fields">
+
           <div className="card-types">
             <span>Visa</span>
             <span>Mastercard</span>
@@ -861,6 +905,7 @@ function BakeryPage() {
             placeholder="Name on Card"
             className="checkout-input"
           />
+
         </div>
       )}
 
@@ -868,13 +913,13 @@ function BakeryPage() {
         className="place-order-button"
         onClick={() => {
           alert("Order placed successfully!");
-
           setCart([]);
           setShowCheckout(false);
         }}
       >
         Place Order
       </button>
+
     </div>
   </div>
 )}
