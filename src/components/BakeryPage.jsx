@@ -123,25 +123,7 @@ function BakeryPage() {
           📍 Contact
         </a>
 
-        <a href="#" className="nav-link">
-          🥬 Fresh Produce
-        </a>
-
-        <a href="#" className="nav-link">
-          🥛 Dairy & Eggs
-        </a>
-
-        <a href="#" className="nav-link">
-          📦 Bakery
-        </a>
-
-        <a href="#" className="nav-link">
-          🧴 Pantry
-        </a>
-
-        <a href="#" className="nav-link">
-          🏠 Household
-        </a>
+        
 
       </nav>
 
@@ -202,7 +184,7 @@ function BakeryPage() {
         </div>
 
 
-        <p className="product-count">6 products</p>
+        <p className="product-count">12 products</p>
 
 
         {/* ================= PRODUCTS ================= */}

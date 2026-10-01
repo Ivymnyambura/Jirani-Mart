@@ -66,25 +66,6 @@ function App() {
           📍 Contact
         </a>
 
-        <a href="#" className="nav-link">
-          🥬 Fresh Produce
-        </a>
-
-        <a href="#" className="nav-link">
-          🥛 Dairy & Eggs
-        </a>
-
-        <a href="#" className="nav-link">
-          📦 Bakery
-        </a>
-
-        <a href="#" className="nav-link">
-          🧴 Pantry
-        </a>
-
-        <a href="#" className="nav-link">
-          🏠 Household
-        </a>
 
       </nav>
 
@@ -199,9 +180,12 @@ function App() {
           👤 My Account
         </button>
 
-        <button className="track-button">
-          📦 Track Order
-        </button>
+        <button
+  id="track-order"
+  className="track-button"
+>
+  📦 Track Order
+</button>
 
         <button className="store-button">
           🗺️ Store Finder

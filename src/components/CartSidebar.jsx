@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./CartSidebar.css";
+import LocationMap from "./LocationMap";
 
 function CartSidebar({
   isOpen,
@@ -82,10 +83,8 @@ function CartSidebar({
 };
 
   const handlePlaceOrder = () => {
-    alert("Order placed successfully!");
-    setView("cart");
-    onClose();
-  };
+  setView("success");
+};
 
   const handleClose = () => {
     setView("cart");
@@ -108,8 +107,10 @@ function CartSidebar({
         <div className="cart-sidebar-header">
           <h2>
             {view === "cart"
-              ? "🛒 Your Cart"
-              : "💳 Checkout"}
+  ? "🛒 Your Cart"
+  : view === "checkout"
+  ? "💳 Checkout"
+  : "🎉 Order Confirmed"}
           </h2>
 
           <button
@@ -174,28 +175,26 @@ function CartSidebar({
 
                     <div className="cart-item-actions">
                       <div className="quantity-controls">
-                        <button
-                          onClick={() =>
-                            onDecrease(index)
-                          }
-                          aria-label="Decrease quantity"
-                        >
-                          −
-                        </button>
+  <button
+    className="quantity-button decrease"
+    onClick={() => onDecrease(index)}
+    aria-label="Decrease quantity"
+  >
+    −
+  </button>
 
-                        <span>
-                          {item.quantity || 1}
-                        </span>
+  <span className="quantity-number">
+    {item.quantity || 1}
+  </span>
 
-                        <button
-                          onClick={() =>
-                            onIncrease(index)
-                          }
-                          aria-label="Increase quantity"
-                        >
-                          +
-                        </button>
-                      </div>
+  <button
+    className="quantity-button increase"
+    onClick={() => onIncrease(index)}
+    aria-label="Increase quantity"
+  >
+    +
+  </button>
+</div>
 
                       <button
                         className="remove-cart-item"
@@ -256,8 +255,7 @@ function CartSidebar({
 
       {/* ORDER SUMMARY */}
       <section className="checkout-section order-summary-section">
-        <h3>Order Summary</h3>
-
+        <h1>Your Order 🛒</h1>
         <div className="order-summary-card">
           <div className="summary-row">
             <span>Items in cart</span>
@@ -268,7 +266,7 @@ function CartSidebar({
 
           <div className="summary-row total-row">
             <span>Total</span>
-            <strong> KSh {subtotal.toFixed(2)}</strong>
+            <strong> Ksh {subtotal.toFixed(2)}</strong>
           </div>
         </div>
       </section>
@@ -317,33 +315,15 @@ function CartSidebar({
             className="checkout-input"
           />
 
-          {/* MAP PLACEHOLDER */}
-          <div className="location-map">
-  <div className="map-placeholder">
-    {userLocation ? (
-      <>
-        <span className="map-icon">📍</span>
+          {/* INTERACTIVE MAP */}
 
-        <strong>Location Selected</strong>
-
-        <p>
-          {userLocation.latitude.toFixed(6)},{" "}
-          {userLocation.longitude.toFixed(6)}
-        </p>
-      </>
-    ) : (
-      <>
-        <span className="map-icon">🗺️</span>
-
-        <strong>Choose your delivery location</strong>
-
-        <p>
-          Use your current location to get started
-        </p>
-      </>
-    )}
-  </div>
-</div>
+<LocationMap
+  location={userLocation}
+  onLocationSelect={(selectedLocation) => {
+    setUserLocation(selectedLocation);
+    setLocationMessage("📍 Delivery location selected.");
+  }}
+/>
 
 <button
   type="button"
@@ -470,6 +450,66 @@ function CartSidebar({
       >
         ← Back to Cart
       </button>
+    </div>
+  </>
+)}
+{/* ========================= */}
+{/* SUCCESS / THANK YOU VIEW */}
+{/* ========================= */}
+
+{view === "success" && (
+  <>
+    <div className="cart-sidebar-content order-success-content">
+
+      <div className="order-success-icon">
+        ✓
+      </div>
+
+      <h2 className="order-success-title">
+        Thank You for Your Order!
+      </h2>
+
+      <p className="order-success-message">
+        Your order has been received successfully.
+        Thank you for shopping with Jirani Mart.
+      </p>
+
+      <div className="order-status-card">
+        <span className="order-status-label">
+          Order Status
+        </span>
+
+        <strong className="order-status">
+          🟢 Order Received
+        </strong>
+
+        <p>
+          We are now preparing your order.
+        </p>
+      </div>
+
+      <div className="order-success-total">
+        <span>Order Total</span>
+
+        <strong>
+          KSh{subtotal.toFixed(2)}
+        </strong>
+      </div>
+
+      <a
+  href="/#track-order"
+  className="track-order-button"
+>
+  📦 Track Your Order →
+</a>
+
+      <button
+        className="success-continue-button"
+        onClick={handleClose}
+      >
+        Continue Shopping
+      </button>
+
     </div>
   </>
 )}
