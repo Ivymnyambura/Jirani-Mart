@@ -14,6 +14,7 @@ function CartSidebar({
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [mobileProvider, setMobileProvider] = useState("mpesa");
+  const [mobileNumber, setMobileNumber] = useState("");
 
   const [userLocation, setUserLocation] = useState(null);
   const [locationMessage, setLocationMessage] = useState("");
@@ -82,8 +83,31 @@ function CartSidebar({
   );
 };
 
-  const handlePlaceOrder = () => {
-  setView("success");
+const handlePlaceOrder = () => {
+  if (paymentMethod === "cash") {
+    setView("success");
+    return;
+  }
+
+  if (paymentMethod === "mobile-money") {
+    if (!mobileNumber.trim()) {
+      alert(
+        `Please enter your ${
+          mobileProvider === "mpesa"
+            ? "M-Pesa"
+            : "Airtel Money"
+        } phone number.`
+      );
+      return;
+    }
+
+    setView("payment");
+    return;
+  }
+
+  if (paymentMethod === "card") {
+    setView("payment");
+  }
 };
 
   const handleClose = () => {
@@ -109,7 +133,7 @@ function CartSidebar({
             {view === "cart"
   ? "🛒 Your Cart"
   : view === "checkout"
-  ? "💳 Checkout"
+  ? "Checkout"
   : "🎉 Order Confirmed"}
           </h2>
 
@@ -127,8 +151,16 @@ function CartSidebar({
         {/* ========================= */}
 
         {view === "cart" && (
-          <>
-            <div className="cart-sidebar-content">
+  <>
+    <div className="cart-top-summary">
+  <div className="cart-summary-info">
+    
+  </div>
+
+  
+</div>
+
+    <div className="cart-sidebar-content">
               {cart.length === 0 ? (
                 <div className="empty-cart">
                   <div className="empty-cart-icon">
@@ -305,7 +337,7 @@ function CartSidebar({
 
           <input
             type="tel"
-            placeholder="Phone Number (e.g. +254 712 345 678)"
+            placeholder="Phone Number +254 712 345 678"
             className="checkout-input"
           />
 
@@ -371,30 +403,56 @@ function CartSidebar({
 
       {/* MOBILE MONEY */}
       {paymentMethod === "mobile-money" && (
-        <section className="checkout-section payment-details-section">
-          <h3>Mobile Money Provider</h3>
+  <section className="checkout-section payment-details-section">
+    <h3>Mobile Money</h3>
 
-          <select
-            className="checkout-select"
-            value={mobileProvider}
-            onChange={(e) => setMobileProvider(e.target.value)}
-          >
-            <option value="mpesa">
-              M-Pesa
-            </option>
+    <div className="mobile-money-options">
+      <button
+        type="button"
+        className={`mobile-money-option ${
+          mobileProvider === "mpesa" ? "active" : ""
+        }`}
+        onClick={() => setMobileProvider("mpesa")}
+      >
+        <span className="mobile-money-icon">M</span>
+        <span>
+          <strong>M-Pesa</strong>
+          <small>Pay securely with M-Pesa</small>
+        </span>
+      </button>
 
-            <option value="airtel">
-              Airtel Money
-            </option>
-          </select>
+      <button
+        type="button"
+        className={`mobile-money-option ${
+          mobileProvider === "airtel" ? "active" : ""
+        }`}
+        onClick={() => setMobileProvider("airtel")}
+      >
+        <span className="mobile-money-icon airtel-icon">A</span>
+        <span>
+          <strong>Airtel Money</strong>
+          <small>Pay securely with Airtel Money</small>
+        </span>
+      </button>
+    </div>
 
-          <input
-            type="tel"
-            placeholder="M-Pesa/Airtel Number (e.g. +254 712 345 678)"
-            className="checkout-input"
-          />
-        </section>
-      )}
+    <input
+  type="tel"
+  value={mobileNumber}
+  onChange={(e) => setMobileNumber(e.target.value)}
+  placeholder={
+    mobileProvider === "mpesa"
+      ? "M-Pesa Number +254712 345 678"
+      : "Airtel Number +254733 123 456"
+  }
+  className="checkout-input"
+/>
+
+    <p className="payment-note">
+      You will receive a payment prompt on your phone to complete the payment.
+    </p>
+  </section>
+)}
 
 
       {/* CARD INFORMATION */}
@@ -457,13 +515,70 @@ function CartSidebar({
 {/* SUCCESS / THANK YOU VIEW */}
 {/* ========================= */}
 
+{view === "payment" && (
+  <>
+    <div className="cart-sidebar-content payment-processing-content">
+
+      <div className="payment-processing-icon">
+        💳
+      </div>
+
+      <h2 className="payment-processing-title">
+        Complete Your Payment
+      </h2>
+
+      <p className="payment-processing-message">
+        {paymentMethod === "mobile-money"
+          ? `We are ready to process your ${
+              mobileProvider === "mpesa"
+                ? "M-Pesa"
+                : "Airtel Money"
+            } payment.`
+          : "We are ready to process your card payment."}
+      </p>
+
+      <div className="payment-processing-card">
+        <span>Amount to Pay</span>
+        <strong>
+          KSh{subtotal.toFixed(2)}
+        </strong>
+      </div>
+
+      {paymentMethod === "mobile-money" && (
+        <p className="payment-processing-note">
+          A payment prompt will be sent to your phone.
+        </p>
+      )}
+
+      {paymentMethod === "card" && (
+        <p className="payment-processing-note">
+          Your card payment will be securely processed.
+        </p>
+      )}
+
+      <button
+        className="place-order-button"
+        onClick={() => setView("success")}
+      >
+        Confirm Payment →
+      </button>
+
+      <button
+        className="sidebar-continue-button"
+        onClick={() => setView("checkout")}
+      >
+        ← Back to Checkout
+      </button>
+
+    </div>
+  </>
+)}
+
 {view === "success" && (
   <>
     <div className="cart-sidebar-content order-success-content">
 
-      <div className="order-success-icon">
-        ✓
-      </div>
+  
 
       <h2 className="order-success-title">
         Thank You for Your Order!

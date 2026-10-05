@@ -543,20 +543,26 @@
     font-size: 10px;
   }
 
-  .sort-container {
-    margin-top: 12px;
-    gap: 6px;
-  }
+  .sort-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
 
-  .sort-container label {
-    font-size: 9px;
-  }
+.sort-box label {
+  color: #66788a;
+  font-size: 13px;
+}
 
-  .sort-container select {
-    width: 98px;
-    padding: 5px;
-    font-size: 9px;
-  }
+.sort-box select {
+  width: 142px;
+  height: 32px;
+  border: 1px solid #d6dde5;
+  border-radius: 4px;
+  background: #ed1745;
+  padding: 0 10px;
+}
 
   .shop-filters {
     gap: 6px;

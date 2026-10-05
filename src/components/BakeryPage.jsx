@@ -1,7 +1,21 @@
 import { useState } from "react";
-import "./BakeryPage.css";
-import CartSidebar from "./CartSidebar";
 
+import "./BakeryPage.css";
+
+import BananaBread from "../assets/BananaBread.jpeg";
+import Assortedtreats from "../assets/Assortedtreats.jpeg";
+import Blueberrymuffins from "../assets/Blueberrymuffins.jpeg";
+import Cinammonrolls from "../assets/Cinammonrolls.jpeg";
+import Lemonrolls from "../assets/Lemonrolls.jpeg";
+import Meatpie from "../assets/Meatpie.jpeg";
+import Oreomuffins from "../assets/Oreomuffins.jpeg";
+import Plaincinammonrolls from "../assets/Plaincinammonrolls.jpeg";
+import Birthdaycinammonrollpack from "../assets/Birthdaycinammonrollpack.jpeg";
+import Oreocakecombo from "../assets/Oreocakecombo.jpeg";
+import Strawberrycinammonrolls from "../assets/Strawberrycinammonrolls.jpeg";
+import Plainloaf from "../assets/Plainloaf.jpeg";
+
+import CartSidebar from "./CartSidebar";
 function BakeryPage() {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -96,10 +110,7 @@ function BakeryPage() {
             <span>Wishlist</span>
           </button>
 
-          <button className="cart-button">
-            🛒
-            <strong>Cart</strong>
-          </button>
+          
         </div>
       </header>
 
@@ -151,11 +162,8 @@ function BakeryPage() {
         <div className="bakery-top">
 
           <div>
-            <p className="breadcrumb">
-              Home &gt; Bakery &amp; Pastries
-            </p>
-
-            <h1>Bakery &amp; Pastries</h1>
+          
+        <h1>Bakery &amp; Pastries</h1>
 
             <p className="bakery-description">
               Baked fresh every morning from 7am
@@ -163,15 +171,14 @@ function BakeryPage() {
           </div>
 
           <div className="sort-box">
-            <label>Sort by:</label>
+  <label htmlFor="sort">Sort by:</label>
 
-            <select>
-              <option>Most Popular</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest</option>
-            </select>
-          </div>
+  <select id="sort">
+    <option value="default">Default</option>
+    <option value="price-low">Price: Low to High</option>
+    <option value="price-high">Price: High to Low</option>
+  </select>
+</div>
 
         </div>
 
@@ -184,7 +191,7 @@ function BakeryPage() {
         </div>
 
 
-        <p className="product-count">12 products</p>
+        <p className="product-count">12 pastries</p>
 
 
         {/* ================= PRODUCTS ================= */}
@@ -199,29 +206,29 @@ function BakeryPage() {
               </button>
 
               <img
-                src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=80"
-                alt="Sourdough loaf"
+                src={BananaBread}
+                alt="Banana Bread"
               />
             </div>
 
             <div className="product-info">
               <p className="product-category">Bread</p>
 
-              <h3>Brown Sourdough Loaf</h3>
+              <h3>Banana Bread</h3>
 
               <p className="product-size">800g</p>
 
               <p className="rating">
-                ⭐⭐⭐⭐⭐ <span>(203)</span>
+                ⭐⭐⭐⭐ <span>(180)</span>
               </p>
 
-              <strong className="product-price">KSh4.50</strong>
+              <strong className="product-price">KSh450.50</strong>
               <button
                className="add-to-cart-button"
                 onClick={() =>
                 addToCart({
-                  name: "Brown Sourdough Loaf",
-                   price: 4.5,
+                  name: "Banana Bread",
+                   price: "450.50",
                     })
                  }
 >
@@ -241,29 +248,29 @@ function BakeryPage() {
               </button>
 
               <img
-                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80"
-                alt="Butter croissant"
+                src={Assortedtreats}
+                alt="Assorted treats"
               />
             </div>
 
             <div className="product-info">
               <p className="product-category">Pastry</p>
 
-              <h3>Breakfast Butter Croissant</h3>
+              <h3>Assorted Treats</h3>
 
-              <p className="product-size">each</p>
+              <p className="product-size">Assorted</p>
 
               <p className="rating">
                 ⭐⭐⭐⭐⭐ <span>(341)</span>
               </p>
 
-              <strong className="product-price">KSh1.80</strong>
+              <strong className="product-price">KSh1050.00</strong>
               <button
              className="add-to-cart-button"
                onClick={() =>
                  addToCart({
-                   name: "Breakfast Butter Croissant",
-                    price: 1.8,
+                   name: "Assorted treats",
+                    price: "1050.00",
                    })
   }
 >
@@ -282,33 +289,30 @@ function BakeryPage() {
               </button>
 
               <img
-                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80"
-                alt="Assorted pastry box"
+                src={Blueberrymuffins}
+                alt="Blueberry muffin"
               />
             </div>
 
             <div className="product-info">
               <p className="product-category">Pastry</p>
 
-              <h3>Assorted Pastry Box</h3>
+              <h3>Blueberry Muffin</h3>
 
-              <p className="product-size">Box of 4</p>
+              <p className="product-size">Each</p>
 
               <p className="rating">
-                ⭐⭐⭐⭐⭐ <span>(97)</span>
+                ⭐⭐⭐⭐ <span>(180)</span>
               </p>
 
-              <div className="price-row">
-                <strong className="product-price">KSh8.50</strong>
-                <del>KSh10.00</del>
-                <span>-15%</span>
-              </div>
+                <strong className="product-price">KSh120.00</strong>
+        
               <button
                 className="add-to-cart-button"
                  onClick={() =>
                   addToCart({
-                   name: "Assorted Pastry Box",
-                     price: 8.5,
+                   name: "Blueberry Muffins",
+                     price: "120.00",
     })
   }
 >
@@ -326,29 +330,29 @@ function BakeryPage() {
               </button>
 
               <img
-                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80"
-                alt="Seeded rye bread"
+                src={Cinammonrolls}
+                alt="Cinnamon rolls"
               />
             </div>
 
             <div className="product-info">
               <p className="product-category">Bread</p>
 
-              <h3>Seeded Rye Bread</h3>
+              <h3>Cinnamon Rolls</h3>
 
-              <p className="product-size">600g</p>
+              <p className="product-size">Each</p>
 
               <p className="rating">
-                ⭐⭐⭐⭐⭐ <span>(66)</span>
+                ⭐⭐⭐⭐⭐ <span>(201)</span>
               </p>
 
-              <strong className="product-price">KSh3.80</strong>
+              <strong className="product-price">KSh150.00</strong>
               <button
   className="add-to-cart-button"
   onClick={() =>
     addToCart({
-      name: "Seeded Rye Bread",
-      price: 3.8,
+      name: "Cinnamon Rolls",
+      price: "150.00",
     })
   }
 >
@@ -357,314 +361,262 @@ function BakeryPage() {
             </div>
           </div>
 
-          {/* Vanilla Muffin */}
+
 <div className="product-card">
   <img
-    src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?auto=format&fit=crop&w=600&q=80"
-    alt="Vanilla Muffin"
+    src={Lemonrolls}
+    alt="Lemon Rolls"
   />
 
   <div className="product-info">
     <span className="product-category">Pastry</span>
-    <h3>Vanilla Muffin</h3>
+    <h3>Lemon Rolls</h3>
     <p className="product-size">Each</p>
 
-    <div className="product-price">
-      KSh2.20
-    </div>
+    <p className="rating">
+                ⭐⭐⭐⭐⭐ <span>(201)</span>
+              </p>
 
-    <div className="product-rating">
-      ★★★★★ <span>(156)</span>
-    </div>
+              <strong className="product-price">KSh200.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Lemon Rolls",
+      price: "200.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Vanilla Muffin",
-          price: 2.2,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
 
-{/* Chocolate Chip Muffin */}
+
 <div className="product-card">
   <img
-  src="https://images.unsplash.com/photo-1558303056-7c9b8b5e6f5b?auto=format&fit=crop&w=600&q=80"
-  alt="Chocolate Muffin"
+  src={Meatpie}
+  alt="Meat Pie"
 />
 
   <div className="product-info">
     <span className="product-category">Pastry</span>
-    <h3>Chocolate Muffin</h3>
+    <h3>Meat Pie</h3>
     <p className="product-size">Each</p>
 
-    <div className="product-price">
-      KSh2.50
-    </div>
+    <p className="rating">
+                ⭐⭐⭐⭐⭐ <span>(201)</span>
+              </p>
 
-    <div className="product-rating">
-      ★★★★★ <span>(189)</span>
-    </div>
+              <strong className="product-price">KSh100.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Meat Pie",
+      price: "100.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Chocolate Chip Muffin",
-          price: 2.5,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
 
-{/* Blueberry Muffin */}
+
 <div className="product-card">
   <img
-  src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80"
-  alt="Blueberry Muffin"
+  src={Oreomuffins}
+  alt="Oreo Muffin"
 />
 
   <div className="product-info">
     <span className="product-category">Pastry</span>
-    <h3>Blueberry Muffin</h3>
+    <h3>Oreo Muffin</h3>
     <p className="product-size">Each</p>
 
-    <div className="product-price">
-      KSh2.40
-    </div>
+    <p className="rating">
+                ⭐⭐⭐⭐ <span>(180)</span>
+              </p>
 
-    <div className="product-rating">
-      ★★★★★ <span>(143)</span>
-    </div>
+              <strong className="product-price">KSh100.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Oreo Muffin",
+      price: "100.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Blueberry Muffin",
-          price: 2.4,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
 
-{/* Banana Bread */}
 <div className="product-card">
   <img
-    src="https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=600&q=80"
-    alt="Banana Bread"
-  />
-
-  <div className="product-info">
-    <span className="product-category">Bread</span>
-    <h3>Banana Bread</h3>
-    <p className="product-size">500g</p>
-
-    <div className="product-price">
-      KSh4.20
-    </div>
-
-    <div className="product-rating">
-      ★★★★★ <span>(118)</span>
-    </div>
-
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Banana Bread",
-          price: 4.2,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
-
-{/* Chocolate Banana Bread */}
-<div className="product-card">
-  <img
-    src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=600&q=80"
-    alt="Chocolate Banana Bread"
-  />
-
-  <div className="product-info">
-    <span className="product-category">Bread</span>
-    <h3>Chocolate Banana Bread</h3>
-    <p className="product-size">500g</p>
-
-    <div className="product-price">
-      KSh4.80
-    </div>
-
-    <div className="product-rating">
-      ★★★★★ <span>(92)</span>
-    </div>
-
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Chocolate Banana Bread",
-          price: 4.8,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
-
-{/* Cinnamon Roll */}
-<div className="product-card">
-  <img
-    src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=600&q=80"
-    alt="Cinnamon Roll"
+    src={Plaincinammonrolls}
+    alt="Plain Cinnamon Rolls"
   />
 
   <div className="product-info">
     <span className="product-category">Pastry</span>
-    <h3>Glazed Cinnamon Roll</h3>
+    <h3>Plain Cinnamon Rolls</h3>
     <p className="product-size">Each</p>
 
-    <div className="product-price">
-      KSh2.80
-    </div>
+    <p className="rating">
+                ⭐⭐⭐⭐⭐ <span>(201)</span>
+              </p>
 
-    <div className="product-rating">
-      ★★★★★ <span>(207)</span>
-    </div>
+              <strong className="product-price">KSh150.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Plain Cinnamon Rolls",
+      price: "150.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Cinnamon Roll",
-          price: 2.8,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
 
-{/* Carrot Cake Slice */}
+
+
 <div className="product-card">
   <img
-    src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=600&q=80"
-    alt="Carrot Cake Slice"
+    src={Birthdaycinammonrollpack}
+    alt="Birthday Cinnamon Roll Pack"
   />
 
   <div className="product-info">
-    <span className="product-category">Cake</span>
-    <h3>Carrot Cake Slice</h3>
-    <p className="product-size">1 slice</p>
+    <span className="product-category">pastry</span>
+    <h3>Birthday Cinnamon Roll Pack</h3>
+    <p className="product-size">1000g</p>
 
-    <div className="product-price">
-      KSh3.50
-    </div>
+    <p className="rating">
+                ⭐⭐⭐⭐ <span>(180)</span>
+              </p>
 
-    <div className="product-rating">
-      ★★★★★ <span>(76)</span>
-    </div>
+              <strong className="product-price">KSh1050.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Birthday Cinnamon Roll Pack",
+      price: "1050.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Carrot Cake Slice",
-          price: 3.5,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
 
-{/* Chocolate Chip Cookie */}
 <div className="product-card">
   <img
-    src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80"
-    alt="Chocolate Chip Cookie"
+    src={Oreocakecombo}
+    alt="Oreo Cake Combo"
   />
 
   <div className="product-info">
     <span className="product-category">Pastry</span>
-    <h3>Chocolate Chip Cookie</h3>
+    <h3>Oreo Cake Combo</h3>
+    <p className="product-size">800g</p>
+
+    <p className="rating">
+                ⭐⭐⭐⭐⭐ <span>(201)</span>
+              </p>
+
+              <strong className="product-price">KSh550.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Oreo Cake Combo",
+      price: "550.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
+
+
+<div className="product-card">
+  <img
+    src={Strawberrycinammonrolls}
+    alt="Strawberry Cinnamon Rolls"
+  />
+
+  <div className="product-info">
+    <span className="product-category">Pastry</span>
+    <h3>Strawberry Cinnamon Rolls</h3>
     <p className="product-size">Each</p>
 
-    <div className="product-price">
-      KSh1.50
-    </div>
+<p className="rating">
+                ⭐⭐⭐ <span>(50)</span>
+              </p>
 
-    <div className="product-rating">
-      ★★★★★ <span>(231)</span>
-    </div>
+              <strong className="product-price">KSh180.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Cinnamon Rolls",
+      price: "150.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
-    <button
-      className="add-to-cart-button"
-      onClick={() =>
-        addToCart({
-          name: "Chocolate Chip Cookie",
-          price: 1.5,
-        })
-      }
-    >
-      + Add to Cart
-    </button>
-  </div>
-</div>
+
+<div className="product-card">
+  <img
+    src={Plainloaf}
+    alt="Plain Loaf"
+  />
+
+  <div className="product-info">
+    <span className="product-category">Pastry</span>
+    <h3>Plain Loaf</h3>
+    <p className="product-size">Each</p>
+
+    <p className="rating">
+                ⭐⭐⭐⭐ <span>(180)</span>
+              </p>
+
+              <strong className="product-price">KSh450.00</strong>
+              <button
+  className="add-to-cart-button"
+  onClick={() =>
+    addToCart({
+      name: "Plain Loaf",
+      price: "450.00",
+    })
+  }
+>
+  + Add to Cart
+</button>
+            </div>
+          </div>
 
         </section>
 
       </main>
 
-   {cart.length > 0 && (
-  <div className="cart-bar">
-    <div className="cart-summary">
-      🛒
-
-      <strong>{cart.length} item(s)</strong>
-
-      <span>
-        Total: KSh
-        {cart
-          .reduce((total, item) => total + item.price, 0)
-          .toFixed(2)}
-      </span>
-    </div>
-
-    <div className="cart-actions">
-      <button
-        className="view-cart-button"
-        onClick={() => setShowCart(true)}
-      >
-        View Cart
-      </button>
-
-      <button
-        className="checkout-button"
-        onClick={() => setShowCheckout(true)}
-      >
-        Checkout
-      </button>
-    </div>
-  </div>
-)}
 {cart.length > 0 && (
   <div className="cart-bar">
     <div className="cart-summary">
@@ -901,6 +853,7 @@ function BakeryPage() {
       >
         Place Order
       </button>
+      
 
     </div>
   </div>

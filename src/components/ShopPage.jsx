@@ -1,5 +1,6 @@
 import "./ShopPage.css";
 
+
 function ShopPage() {
   const products = [
     {
@@ -122,17 +123,15 @@ function ShopPage() {
             </p>
           </div>
 
-          <div className="sort-container">
-            <label htmlFor="sort">Sort by:</label>
+          <div className="sort-box">
+  <label htmlFor="sort">Sort by:</label>
 
-            <select id="sort">
-              <option>Most Popular</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest</option>
-            </select>
-          </div>
-
+  <select id="sort">
+    <option value="default">Default</option>
+    <option value="price-low">Price: Low to High</option>
+    <option value="price-high">Price: High to Low</option>
+  </select>
+</div>
         </div>
 
 

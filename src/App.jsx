@@ -38,10 +38,7 @@ function App() {
             <span>Wishlist</span>
           </button>
 
-          <button className="cart-button">
-            🛒
-            <strong>Cart</strong>
-          </button>
+          
 
         </div>
       </header>
@@ -177,7 +174,7 @@ function App() {
       <div className="bottom-bar">
 
         <button className="account-button">
-          👤 My Account
+          🛒 My Cart
         </button>
 
         <button
@@ -187,9 +184,7 @@ function App() {
   📦 Track Order
 </button>
 
-        <button className="store-button">
-          🗺️ Store Finder
-        </button>
+        
 
       </div>
 
