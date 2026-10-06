@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./CartSidebar.css";
 import LocationMap from "./LocationMap";
+import mpesaIcon from "../assets/mpesa icon.png";
+import airtelIcon from "../assets/airtel icon.png";
 
 function CartSidebar({
   isOpen,
@@ -15,6 +17,7 @@ function CartSidebar({
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [mobileProvider, setMobileProvider] = useState("mpesa");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [paymentError, setPaymentError] = useState("");
 
   const [userLocation, setUserLocation] = useState(null);
   const [locationMessage, setLocationMessage] = useState("");
@@ -90,17 +93,27 @@ const handlePlaceOrder = () => {
   }
 
   if (paymentMethod === "mobile-money") {
-    if (!mobileNumber.trim()) {
-      alert(
-        `Please enter your ${
-          mobileProvider === "mpesa"
-            ? "M-Pesa"
-            : "Airtel Money"
-        } phone number.`
+    const cleanedNumber = mobileNumber.replace(/\s+/g, "");
+
+    const validKenyanNumber =
+      /^(?:07|01)\d{8}$/.test(cleanedNumber) ||
+      /^\+254(?:7|1)\d{8}$/.test(cleanedNumber);
+
+    if (!validKenyanNumber) {
+      setPaymentError(
+        `Please enter a valid ${
+          mobileProvider === "mpesa" ? "M-Pesa" : "Airtel Money"
+        } number.`
       );
+
+      setTimeout(() => {
+        setPaymentError("");
+      }, 3500);
+
       return;
     }
 
+    setPaymentError("");
     setView("payment");
     return;
   }
@@ -414,7 +427,9 @@ const handlePlaceOrder = () => {
         }`}
         onClick={() => setMobileProvider("mpesa")}
       >
-        <span className="mobile-money-icon">M</span>
+        <span className="mobile-money-icon">
+  <img src={mpesaIcon} alt="M-Pesa" />
+</span>
         <span>
           <strong>M-Pesa</strong>
           <small>Pay securely with M-Pesa</small>
@@ -428,7 +443,9 @@ const handlePlaceOrder = () => {
         }`}
         onClick={() => setMobileProvider("airtel")}
       >
-        <span className="mobile-money-icon airtel-icon">A</span>
+        <span className="mobile-money-icon airtel-icon">
+  <img src={airtelIcon} alt="Airtel Money" />
+</span>
         <span>
           <strong>Airtel Money</strong>
           <small>Pay securely with Airtel Money</small>
@@ -447,6 +464,13 @@ const handlePlaceOrder = () => {
   }
   className="checkout-input"
 />
+
+{paymentError && (
+  <div className="payment-error-message">
+    <span>⚠</span>
+    {paymentError}
+  </div>
+)}
 
     <p className="payment-note">
       You will receive a payment prompt on your phone to complete the payment.
@@ -528,15 +552,45 @@ const handlePlaceOrder = () => {
       </h2>
 
       <p className="payment-processing-message">
-        {paymentMethod === "mobile-money"
-          ? `We are ready to process your ${
-              mobileProvider === "mpesa"
-                ? "M-Pesa"
-                : "Airtel Money"
-            } payment.`
-          : "We are ready to process your card payment."}
-      </p>
+  {paymentMethod === "mobile-money"
+    ? `A payment request has been sent to your ${
+        mobileProvider === "mpesa"
+          ? "M-Pesa"
+          : "Airtel Money"
+      } number.`
+    : "Your card payment is being securely processed."}
+</p>
 
+{paymentMethod === "mobile-money" && (
+  <div className="payment-provider-summary">
+    <div className="payment-provider-icon">
+      <img
+        src={
+          mobileProvider === "mpesa"
+            ? mpesaIcon
+            : airtelIcon
+        }
+        alt={
+          mobileProvider === "mpesa"
+            ? "M-Pesa"
+            : "Airtel Money"
+        }
+      />
+    </div>
+
+    <div className="payment-provider-details">
+      <span>Payment Method</span>
+      <strong>
+        {mobileProvider === "mpesa"
+          ? "M-Pesa"
+          : "Airtel Money"}
+      </strong>
+
+      <span>Phone Number</span>
+      <strong>{mobileNumber}</strong>
+    </div>
+  </div>
+)}
       <div className="payment-processing-card">
         <span>Amount to Pay</span>
         <strong>
@@ -557,11 +611,17 @@ const handlePlaceOrder = () => {
       )}
 
       <button
-        className="place-order-button"
-        onClick={() => setView("success")}
-      >
-        Confirm Payment →
-      </button>
+  className="place-order-button"
+  onClick={() => {
+    setView("payment-processing");
+
+    setTimeout(() => {
+      setView("success");
+    }, 2500);
+  }}
+>
+  Confirm Payment →
+</button>
 
       <button
         className="sidebar-continue-button"
@@ -573,6 +633,66 @@ const handlePlaceOrder = () => {
     </div>
   </>
 )}
+
+{view === "payment-processing" && (
+  <>
+    <div className="cart-sidebar-content payment-processing-content">
+
+      <div className="payment-loading-icon">
+  {paymentMethod === "mobile-money" ? (
+    <img
+      src={
+        mobileProvider === "mpesa"
+          ? mpesaIcon
+          : airtelIcon
+      }
+      alt={
+        mobileProvider === "mpesa"
+          ? "M-Pesa"
+          : "Airtel Money"
+      }
+    />
+  ) : (
+    <span>💳</span>
+  )}
+</div>
+
+      <h2 className="payment-processing-title">
+        Payment Request Sent
+      </h2>
+
+      <p className="payment-processing-message">
+        {paymentMethod === "mobile-money"
+          ? `We're sending a payment request to ${
+              mobileProvider === "mpesa"
+                ? "M-Pesa"
+                : "Airtel Money"
+            }.`
+          : "We're securely processing your card payment."}
+      </p>
+
+      {paymentMethod === "mobile-money" && (
+        <div className="payment-processing-number">
+          <span>Payment Number</span>
+          <strong>{mobileNumber}</strong>
+        </div>
+      )}
+
+      <p className="payment-processing-note">
+        Please wait while we process your payment.
+      </p>
+
+      <button
+  className="cancel-payment-button"
+  onClick={() => setView("payment")}
+>
+  Cancel Payment
+</button>
+
+    </div>
+  </>
+)}
+
 
 {view === "success" && (
   <>
@@ -610,6 +730,19 @@ const handlePlaceOrder = () => {
           KSh{subtotal.toFixed(2)}
         </strong>
       </div>
+      <div className="order-payment-method">
+  <span>Payment Method</span>
+
+  <strong>
+    {paymentMethod === "cash"
+      ? "💵 Cash upon Delivery"
+      : paymentMethod === "mobile-money"
+      ? mobileProvider === "mpesa"
+        ? "M-Pesa"
+        : "Airtel Money"
+      : "💳 Credit / Debit Card"}
+  </strong>
+</div>
 
       <a
   href="/#track-order"
