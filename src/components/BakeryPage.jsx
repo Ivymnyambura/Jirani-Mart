@@ -8,7 +8,7 @@ import BananaBread from "../assets/BananaBread.jpeg";
 import Assortedtreats from "../assets/Assortedtreats.jpeg";
 import Blueberrymuffins from "../assets/Blueberrymuffins.jpeg";
 import Cinammonrolls from "../assets/Cinammonrolls.jpeg";
-import Lemonrolls from "../assets/Lemonrolls.jpeg";
+import LemonRolls from "../assets/LemonRolls.jpeg";
 import Meatpie from "../assets/Meatpie.jpeg";
 import Oreomuffins from "../assets/Oreomuffins.jpeg";
 import Plaincinammonrolls from "../assets/Plaincinammonrolls.jpeg";
@@ -320,7 +320,7 @@ function BakeryPage() {
 
 <div className="product-card">
   <img
-    src={Lemonrolls}
+    src={LemonRolls}
     alt="Lemon Rolls"
   />
 
