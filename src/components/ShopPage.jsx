@@ -1,7 +1,16 @@
+
+import { useState } from "react";
+
 import "./ShopPage.css";
 
+import Header from "./Header";
+
+import CartSidebar from "./CartSidebar";
 
 function ShopPage() {
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+
   const products = [
     {
       name: "White Bread Loaf",
@@ -88,10 +97,106 @@ function ShopPage() {
     },
   ];
 
+  // Convert prices such as "KSh1.20" into numbers for cart calculations
+  const getNumericPrice = (price) => {
+    return Number(String(price).replace("KSh", "").replace(/,/g, ""));
+  };
+
+  const addToCart = (product) => {
+    setCart((currentCart) => {
+      const existingItem = currentCart.find(
+        (item) => item.name === product.name
+      );
+
+      if (existingItem) {
+        return currentCart.map((item) =>
+          item.name === product.name
+            ? {
+                ...item,
+                quantity: (item.quantity || 1) + 1,
+              }
+            : item
+        );
+      }
+
+      return [
+        ...currentCart,
+        {
+          ...product,
+          price: getNumericPrice(product.price),
+          quantity: 1,
+        },
+      ];
+    });
+
+    // Important:
+    // Adding an item does NOT open the sidebar.
+    // The bottom cart bar appears first.
+  };
+
+  const removeFromCart = (index) => {
+    setCart((currentCart) =>
+      currentCart.filter((_, i) => i !== index)
+    );
+  };
+
+  const increaseQuantity = (index) => {
+    setCart((currentCart) =>
+      currentCart.map((item, i) =>
+        i === index
+          ? {
+              ...item,
+              quantity: (item.quantity || 1) + 1,
+            }
+          : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (index) => {
+    setCart((currentCart) =>
+      currentCart.flatMap((item, i) => {
+        if (i !== index) {
+          return [item];
+        }
+
+        const newQuantity = (item.quantity || 1) - 1;
+
+        if (newQuantity <= 0) {
+          return [];
+        }
+
+        return [
+          {
+            ...item,
+            quantity: newQuantity,
+          },
+        ];
+      })
+    );
+  };
+
+  const cartItemCount = cart.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  );
+
+  const cartTotal = cart.reduce(
+    (total, item) =>
+      total + Number(item.price) * (item.quantity || 1),
+    0
+  );
+
   return (
     <div className="shop-page">
 
-      {/* Search */}
+      {/* ================= HEADER ================= */}
+
+      <Header onCartClick={() => setShowCart(true)} />
+
+
+      {/* ================= SEARCH ================= */}
+
       <section className="shop-search-section">
         <div className="shop-search-box">
           <input
@@ -106,60 +211,106 @@ function ShopPage() {
       </section>
 
 
-      {/* Page heading */}
+      {/* ================= PAGE CONTENT ================= */}
+
       <main className="shop-content">
+
+        {/* Page heading */}
 
         <div className="shop-heading">
 
           <div>
-            <div className="breadcrumb">
-              Home › Household Essentials
-            </div>
-
-            <h1>Household Essentials</h1>
+            <h1>
+              Household Essentials
+            </h1>
 
             <p>
               Everything you need for everyday life
             </p>
           </div>
 
-          <div className="sort-box">
-  <label htmlFor="sort">Sort by:</label>
 
-  <select id="sort">
-    <option value="default">Default</option>
-    <option value="price-low">Price: Low to High</option>
-    <option value="price-high">Price: High to Low</option>
-  </select>
-</div>
+          {/* Sort */}
+
+          <div className="sort-box">
+
+            <label htmlFor="sort">
+              Sort by:
+            </label>
+
+            <select id="sort">
+
+              <option value="default">
+                Default
+              </option>
+
+              <option value="price-low">
+                Price: Low to High
+              </option>
+
+              <option value="price-high">
+                Price: High to Low
+              </option>
+
+            </select>
+
+          </div>
+
         </div>
 
 
-        {/* Categories */}
+        {/* ================= CATEGORIES ================= */}
+
         <div className="shop-filters">
 
-          <button className="filter active">All</button>
-          <button className="filter">Bakery</button>
-          <button className="filter">Dairy</button>
-          <button className="filter">Baking</button>
-          <button className="filter">Pantry</button>
-          <button className="filter">Household</button>
-          <button className="filter">Personal Care</button>
+          <button className="filter active">
+            All
+          </button>
+
+          <button className="filter">
+            Bakery
+          </button>
+
+          <button className="filter">
+            Dairy
+          </button>
+
+          <button className="filter">
+            Baking
+          </button>
+
+          <button className="filter">
+            Pantry
+          </button>
+
+          <button className="filter">
+            Household
+          </button>
+
+          <button className="filter">
+            Personal Care
+          </button>
 
         </div>
 
 
-        {/* Product count */}
+        {/* ================= PRODUCT COUNT ================= */}
+
         <p className="product-count">
-          12 products
+          {products.length} products
         </p>
 
 
-        {/* Products */}
+        {/* ================= PRODUCTS ================= */}
+
         <section className="product-grid">
 
           {products.map((product, index) => (
-            <article className="product-card" key={index}>
+
+            <article
+              className="product-card"
+              key={index}
+            >
 
               <div className="product-image">
 
@@ -174,7 +325,9 @@ function ShopPage() {
                 </button>
 
                 <div className="placeholder-image">
-                  <span>{product.emoji}</span>
+                  <span>
+                    {product.emoji}
+                  </span>
                 </div>
 
               </div>
@@ -194,10 +347,19 @@ function ShopPage() {
                   {product.size}
                 </p>
 
+
                 <div className="rating">
-                  <span>{product.rating}</span>
-                  <small>{product.reviews}</small>
+
+                  <span>
+                    {product.rating}
+                  </span>
+
+                  <small>
+                    {product.reviews}
+                  </small>
+
                 </div>
+
 
                 <div className="price-row">
 
@@ -219,13 +381,18 @@ function ShopPage() {
 
                 </div>
 
-                <button className="add-cart-button">
+
+                <button
+                  className="add-cart-button"
+                  onClick={() => addToCart(product)}
+                >
                   + Add to Cart
                 </button>
 
               </div>
 
             </article>
+
           ))}
 
         </section>
@@ -233,38 +400,74 @@ function ShopPage() {
       </main>
 
 
-      {/* Cart bar */}
-      <div className="shop-cart-bar">
+      {/* ================= BOTTOM CART BAR ================= */}
 
-        <div className="cart-summary">
+      {cart.length > 0 && (
 
-          <div className="cart-number">
-            1
+        <div className="cart-bar">
+
+          <div className="cart-summary">
+
+            🛒
+
+            <strong>
+              {cartItemCount} item(s)
+            </strong>
+
+            <span>
+              Total: KSh{cartTotal.toFixed(2)}
+            </span>
+
           </div>
 
-          <div>
-            <span>Items in cart</span>
-            <strong>KSh1.20</strong>
+
+          <div className="cart-actions">
+
+            <button
+              className="view-cart-button"
+              onClick={() => setShowCart(true)}
+            >
+              View Cart
+            </button>
+
+
+            <button
+              className="checkout-button"
+              onClick={() => setShowCart(true)}
+            >
+              Checkout
+            </button>
+
           </div>
 
         </div>
 
-        <div className="cart-actions">
+      )}
 
-          <button className="view-cart-button">
-            View Cart
-          </button>
 
-          <button className="checkout-button">
-            Checkout →
-          </button>
+      {/* ================= CART SIDEBAR ================= */}
 
-        </div>
+      <CartSidebar
 
-      </div>
+        isOpen={showCart}
+
+        cart={cart}
+
+        onClose={() => setShowCart(false)}
+
+        onCheckout={() => {}}
+
+        onRemove={removeFromCart}
+
+        onIncrease={increaseQuantity}
+
+        onDecrease={decreaseQuantity}
+
+      />
 
     </div>
   );
 }
 
 export default ShopPage;
+

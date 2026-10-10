@@ -1,172 +1,306 @@
-.header {
+/* ========================================
+   SITE HEADER
+======================================== */
+
+.site-header {
   width: 100%;
   background: #07549a;
   color: white;
 }
 
-/* ================================
-   HEADER TOP
-================================ */
 
-.header-top {
-  height: 66px;
-  padding: 0 24px;
+/* ========================================
+   TOP HEADER
+======================================== */
+
+.site-header-main {
+  min-height: 82px;
+
+  padding: 0 40px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 30px;
 }
 
 
-/* ================================
-   BRAND
-================================ */
+/* ========================================
+   LOGO
+======================================== */
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-circle {
-  width: 42px;
-  height: 42px;
-
-  background: white;
-  color: #07549a;
-
-  border-radius: 50%;
+.site-header-logo {
+  width: 165px;
+  height: 68px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-weight: 800;
-  font-size: 17px;
+  flex-shrink: 0;
 }
 
-.brand-name {
-  display: flex;
-  flex-direction: column;
-}
+.site-header-logo img {
+  width: 100%;
+  height: 100%;
 
-.brand-name strong {
-  font-size: 18px;
-  line-height: 18px;
-}
+  object-fit: contain;
 
-.brand-name span {
-  font-size: 10px;
-  font-weight: 700;
+  display: block;
 }
 
 
-/* ================================
+/* ========================================
    HEADER ACTIONS
-================================ */
+======================================== */
 
-.header-actions {
+.site-header-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 24px;
 }
 
-.header-actions button {
+
+/* ========================================
+   ACCOUNT + WISHLIST
+======================================== */
+
+.site-header-action {
   border: none;
   background: transparent;
+
   color: white;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
-  gap: 2px;
+  padding: 8px 0;
 
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.header-actions button span {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
+
+  cursor: pointer;
+
+  transition: opacity 0.2s ease;
+}
+
+.site-header-action:hover {
+  opacity: 0.8;
+}
+
+.site-action-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.site-header-action span:last-child {
+  font-size: 14px;
 }
 
 
-/* ================================
-   CART BUTTON
-================================ */
+/* ========================================
+   CART
+======================================== */
 
-.header-actions .cart-button {
+.site-header-cart {
+  border: none;
+
   background: #ed123b;
   color: white;
 
-  padding: 11px 24px;
+  min-height: 46px;
 
-  border-radius: 4px;
-  border: none;
+  padding: 0 17px;
+
+  border-radius: 5px;
 
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.site-header-cart:hover {
+  background: #d90f35;
+  transform: translateY(-1px);
+}
+
+.site-cart-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.site-cart-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  line-height: 1.1;
+}
+
+.site-cart-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.site-cart-text {
+  font-size: 10px;
+  opacity: 0.9;
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.site-navigation {
+  background: white;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.site-navigation-inner {
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 55px;
+}
+
+.site-nav-link {
+  height: 48px;
+
+  display: flex;
   align-items: center;
 
-  gap: 8px;
+  position: relative;
 
-  font-size: 16px;
+  color: #07549a;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: color 0.2s ease;
 }
 
-.header-actions .cart-button span {
-  font-size: 15px;
+.site-nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 3px;
+
+  background: #ed123b;
+
+  transform: scaleX(0);
+
+  transition: transform 0.2s ease;
+}
+
+.site-nav-link:hover {
+  color: #ed123b;
+}
+
+.site-nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 
-/* ================================
+/* ========================================
    MOBILE
-================================ */
+======================================== */
 
 @media (max-width: 700px) {
 
-  .header-top {
-    height: 64px;
-    padding: 0 12px;
+  .site-header-main {
+    min-height: 70px;
+
+    padding: 8px 14px;
+
+    gap: 15px;
   }
 
-  .brand {
-    gap: 7px;
+  .site-header-logo {
+    width: 125px;
+    height: 55px;
   }
 
-  .brand-circle {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
+  .site-header-actions {
+    gap: 10px;
   }
 
-  .brand-name strong {
-    font-size: 14px;
-    line-height: 14px;
+  .site-header-action {
+    padding: 5px;
   }
 
-  .brand-name span {
-    font-size: 8px;
+  .site-header-action > span:last-child {
+    display: none;
   }
 
-  .header-actions {
-    gap: 7px;
+  .site-action-icon {
+    font-size: 20px;
   }
 
-  .header-actions button {
-    font-size: 13px;
+  .site-header-cart {
+    min-height: 40px;
+
+    padding: 0 11px;
   }
 
-  .header-actions button span {
-    font-size: 9px;
+  .site-cart-text {
+    display: none;
   }
 
-  .header-actions .cart-button {
-    padding: 8px 12px;
+  .site-navigation-inner {
+    min-height: 44px;
+
+    gap: 30px;
+  }
+
+  .site-nav-link {
+    height: 44px;
+
     font-size: 12px;
   }
+}
 
-  .header-actions .cart-button span {
-    font-size: 11px;
+
+@media (max-width: 450px) {
+
+  .site-header-main {
+    padding: 8px 10px;
+  }
+
+  .site-header-logo {
+    width: 105px;
+    height: 48px;
+  }
+
+  .site-header-actions {
+    gap: 5px;
+  }
+
+  .site-header-cart {
+    padding: 0 9px;
+  }
+
+  .site-navigation-inner {
+    gap: 20px;
   }
 }

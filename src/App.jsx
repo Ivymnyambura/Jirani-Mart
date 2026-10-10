@@ -1,8 +1,14 @@
+import { useState } from "react";
 import "./App.css";
 import ShopPage from "./components/ShopPage";
 import BakeryPage from "./components/BakeryPage";
+import Header from "./components/Header";
+import CartSidebar from "./components/CartSidebar";
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+
     if (window.location.pathname === "/shop") {
     return <ShopPage />;
   }
@@ -12,60 +18,7 @@ function App() {
   return (
     <div className="app">
 
-      {/* ================= HEADER ================= */}
-      <header className="header">
-
-        {/* Logo */}
-        <div className="logo">
-          <div className="logo-circle">JM</div>
-
-          <div className="logo-text">
-            <strong>Jirani</strong>
-            <span>MART</span>
-          </div>
-        </div>
-
-        {/* Account / Wishlist / Cart */}
-        <div className="header-actions">
-
-          <button className="header-action">
-            👤
-            <span>Account</span>
-          </button>
-
-          <button className="header-action">
-            ❤️
-            <span>Wishlist</span>
-          </button>
-
-          
-
-        </div>
-      </header>
-
-
-      {/* ================= NAVIGATION ================= */}
-      <nav className="navigation">
-
-        <a href="#" className="nav-link active">
-          🏠 Home
-        </a>
-
-        <a href="/shop" className="nav-link">
-          🛒 Shop
-        </a>
-
-        <a href="/bakery" className="nav-link">
-          📦 Bakery
-        </a>
-
-        <a href="#" className="nav-link">
-          📍 Contact
-        </a>
-
-
-      </nav>
-
+      <Header onCartClick={() => setShowCart(true)} />
 
       {/* ================= SEARCH ================= */}
       <section className="search-section">
@@ -170,23 +123,36 @@ function App() {
       </main>
 
 
-      {/* ================= BOTTOM BAR ================= */}
-      <div className="bottom-bar">
-
-        <button className="account-button">
-          🛒 My Cart
-        </button>
-
-        <button
-  id="track-order"
-  className="track-button"
->
-  📦 Track Order
-</button>
-
-        
-
-      </div>
+      <CartSidebar
+  isOpen={showCart}
+  cart={cart}
+  onClose={() => setShowCart(false)}
+  onCheckout={() => {}}
+  onRemove={(index) => {
+    setCart((currentCart) =>
+      currentCart.filter((_, i) => i !== index)
+    );
+  }}
+  onIncrease={(index) => {
+    setCart((currentCart) =>
+      currentCart.map((item, i) =>
+        i === index
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
+          : item
+      )
+    );
+  }}
+  onDecrease={(index) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item, i) =>
+          i === index
+            ? { ...item, quantity: Math.max((item.quantity || 1) - 1, 1) }
+            : item
+        )
+    );
+  }}
+/>
 
     </div>
   );

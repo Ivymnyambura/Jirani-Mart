@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import "./BakeryPage.css";
 
+import Header from "./Header";
+
 import BananaBread from "../assets/BananaBread.jpeg";
 import Assortedtreats from "../assets/Assortedtreats.jpeg";
 import Blueberrymuffins from "../assets/Blueberrymuffins.jpeg";
@@ -88,55 +90,9 @@ function BakeryPage() {
   return (
     <div className="bakery-page">
 
-      {/* ================= HEADER ================= */}
-      <header className="header">
-        <div className="logo">
-          <div className="logo-circle">JM</div>
+       <Header onCartClick={() => setShowCart(true)} />
 
-          <div className="logo-text">
-            <strong>Jirani</strong>
-            <span>MART</span>
-          </div>
-        </div>
-
-        <div className="header-actions">
-          <button className="header-action">
-            👤
-            <span>Account</span>
-          </button>
-
-          <button className="header-action">
-            ❤️
-            <span>Wishlist</span>
-          </button>
-
-          
-        </div>
-      </header>
-
-
-      {/* ================= NAVIGATION ================= */}
-      <nav className="navigation">
-
-        <a href="/" className="nav-link">
-          🏠 Home
-        </a>
-
-        <a href="/shop" className="nav-link">
-          🛒 Shop
-        </a>
-
-        <a href="/bakery" className="nav-link active">
-          📦 Bakery
-        </a>
-
-        <a href="#" className="nav-link">
-          📍 Contact
-        </a>
-
-        
-
-      </nav>
+    
 
 
       {/* ================= SEARCH ================= */}

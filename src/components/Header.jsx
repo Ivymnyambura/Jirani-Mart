@@ -1,41 +1,71 @@
 import "./Header.css";
+import jiraniLogo from "../assets/Jirani Mart JM Logo.png";
 
-function Header() {
+function Header({ onCartClick }) {
   return (
-    <header className="header">
-      <div className="header-top">
+    <header className="site-header">
+
+      {/* ================================
+          TOP HEADER
+      ================================= */}
+
+      <div className="site-header-main">
 
         {/* Logo */}
-        <div className="brand">
-          <div className="brand-circle">JM</div>
+        <a href="/" className="site-header-logo">
+          <img
+            src={jiraniLogo}
+            alt="Jirani Mart"
+          />
+        </a>
 
-          <div className="brand-name">
-            <strong>Jirani</strong>
-            <span>MART</span>
-          </div>
-        </div>
+        {/* Header Actions */}
+        <div className="site-header-actions">
 
-        {/* Header buttons */}
-        <div className="header-actions">
-
-          <button>
-            👤
-            <span>Account</span>
-          </button>
-
-          <button>
-            ❤️
+          
+          <button className="site-header-action">
+            <span className="site-action-icon">❤️</span>
             <span>Wishlist</span>
           </button>
 
-          <button className="cart-button">
-            🛒
-            <span>Cart</span>
+          <button className="site-header-action">
+            <span className="site-action-icon">🛵</span>
+            <span>Track Order</span>
           </button>
 
         </div>
 
       </div>
+
+
+      {/* ================================
+          CENTERED NAVIGATION
+      ================================= */}
+
+      <nav className="site-navigation">
+
+        <div className="site-navigation-inner">
+
+          <a href="/" className="site-nav-link">
+            Home
+          </a>
+
+          <a href="/shop" className="site-nav-link">
+            Shop
+          </a>
+
+          <a href="/bakery" className="site-nav-link">
+            Bakery
+          </a>
+
+          <a href="/profile" className="site-nav-link">
+            Profile
+          </a>
+
+        </div>
+
+      </nav>
+
     </header>
   );
 }
