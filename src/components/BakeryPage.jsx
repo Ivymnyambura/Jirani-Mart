@@ -11,7 +11,7 @@ import Cinammonrolls from "../assets/Cinammonrolls.jpeg";
 import LemonRolls from "../assets/LemonRolls.jpeg";
 import Meatpie from "../assets/Meatpie.jpeg";
 import Oreomuffins from "../assets/Oreomuffins.jpeg";
-import PlainCinammonrolls from "../assets/PlainCinammonrolls.jpeg";
+import PlainCinammonRolls from "../assets/PlainCinammonrolls.jpeg";
 import Birthdaycinammonrollpack from "../assets/Birthdaycinammonrollpack.jpeg";
 import Oreocakecombo from "../assets/Oreocakecombo.jpeg";
 import Strawberrycinammonrolls from "../assets/Strawberrycinammonrolls.jpeg";
