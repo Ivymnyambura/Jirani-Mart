@@ -10,7 +10,7 @@ import Blueberrymuffins from "../assets/Blueberrymuffins.jpeg";
 import Cinammonrolls from "../assets/Cinammonrolls.jpeg";
 import LemonRolls from "../assets/LemonRolls.jpeg";
 import Meatpie from "../assets/Meatpie.jpeg";
-import Oreomuffins from "../assets/Oreomuffins.jpeg";
+import oreomuffins from "../assets/oreomuffins.jpeg";
 import PlainCinammonRolls from "../assets/PlainCinammonrolls.jpeg";
 import Birthdaycinammonrollpack from "../assets/Birthdaycinammonrollpack.jpeg";
 import Oreocakecombo from "../assets/Oreocakecombo.jpeg";
@@ -384,7 +384,7 @@ function BakeryPage() {
 
 <div className="product-card">
   <img
-  src={Oreomuffins}
+  src={oreomuffinsreomuffins}
   alt="Oreo Muffin"
 />
 
