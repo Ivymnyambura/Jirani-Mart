@@ -384,7 +384,7 @@ function BakeryPage() {
 
 <div className="product-card">
   <img
-  src={oreomuffinsreomuffins}
+  src={oreomuffins}
   alt="Oreo Muffin"
 />
 
